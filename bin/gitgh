@@ -1,0 +1,21 @@
+#!/bin/sh
+# Pull an issue number from the current branch name and open
+# it in the webbrowser. Only works if github (gh) is the remote origin, 
+# and using the https url.
+# tfaris 12.09.2015
+b=$(git rev-parse --abbrev-ref HEAD)
+url=$(git config --get remote.origin.url)/issues/
+python -c "
+import sys
+import webbrowser
+import time
+try: 
+    issue=sys.argv[2].split('/')[1]
+    int(issue)
+    url = sys.argv[1]+issue
+    print 'Opening %s...' % url 
+    time.sleep(.5)
+    webbrowser.open(url)
+except (IndexError, ValueError):
+    print 'Cannot parse branch name %s as an issue.' % sys.argv[2]
+" $url $b

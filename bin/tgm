@@ -1,0 +1,2 @@
+#!/bin/sh
+"C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe" /command:merge "$@" &

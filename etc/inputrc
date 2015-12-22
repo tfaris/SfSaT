@@ -1,0 +1,2 @@
+# Fixes screen clear not working in Git Bash running under ConEmu
+Control-l: "clear\n"

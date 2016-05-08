@@ -71,7 +71,7 @@ do
             selectAudioDevice "$tvSoundDevice"
         fi
         echo "Changing to a basic theme..."
-        "$WinaeroThemeSwitcher" "$basicTheme"
+        "$themeSwitcher" "$basicTheme"
     else        
         if !([ -n "$fluxRunning" ]) && !([ -n "$steamRunning" ])
         then

@@ -1,0 +1,5 @@
+# git branch order
+# usage: git bo
+# Lists all branches in order of activity oldest-to-newest,
+# so most branches with most recent activity show at the bottom.
+alias.bo=for-each-ref --sort=committerdate refs/heads/

@@ -9,3 +9,4 @@ choco install notepadplusplus.install -y
 choco install keepass.install -y
 choco install vlc -y
 choco install conemu -y
+choco install f.lux -y

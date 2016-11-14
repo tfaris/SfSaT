@@ -1,0 +1,10 @@
+If Cmder Here and Cmder Inside explorer integrations don't open to the
+expected directory, do this:
+
+1. Settings > Startup > Tasks
+2. Edit Commands for {cmd::Cmder} and {cmd::Cmder as Admin},
+   replace 
+            -new_console:d:%USERPROFILE%
+   with
+            -new_console:n
+3. Save settings

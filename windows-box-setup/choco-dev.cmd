@@ -4,7 +4,6 @@ REM Make sure you're running from an elevated cmd prompt
 call install-choco.cmd
 
 REM Tools
-choco install notepadplusplus.install -y
 choco install VisualStudioCode -y
 choco install git.install -y
 choco install tortoisegit -y

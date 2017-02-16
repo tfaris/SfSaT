@@ -4,9 +4,10 @@ REM Make sure you're running from an elevated cmd prompt
 call install-choco.cmd
 
 choco install googlechrome -y
+choco install notepadplusplus.install --forcex86 -y
+choco install Cmder -y
 choco install teamviewer -y
-choco install notepadplusplus.install -y
 choco install keepass.install -y
 choco install vlc -y
-choco install conemu -y
 choco install f.lux -y
+choco install 7zip.install -y

@@ -4,18 +4,26 @@
 # and using the https url.
 # tfaris 12.09.2015
 b=$(git rev-parse --abbrev-ref HEAD)
-url=$(git config --get remote.origin.url)/issues/
+ghUrl=$(git config --get remote.origin.url)
 python -c "
+import re
 import sys
 import webbrowser
 import time
-try: 
-    issue=sys.argv[2].split('/')[1]
+gh_url = sys.argv[1]
+gh_url = gh_url.replace('.git', '')
+ref = sys.argv[2]
+print('Origin: %s' % gh_url)
+print('Ref   : %s' % ref)
+try:
+    issue = re.sub('[^\d]', '', ref.split('/')[1])
     int(issue)
-    url = sys.argv[1]+issue
-    print 'Opening %s...' % url 
+    url = gh_url + '/issues/' + issue
+    print('Opening %s...' % url)
     time.sleep(.5)
     webbrowser.open(url)
 except (IndexError, ValueError):
-    print 'Cannot parse branch name %s as an issue.' % sys.argv[2]
-" $url $b
+    print('Cannot parse branch name %s as an issue. Opening tree...' % ref)
+    url = gh_url + '/tree/' + ref
+    webbrowser.open(url)
+" $ghUrl $b

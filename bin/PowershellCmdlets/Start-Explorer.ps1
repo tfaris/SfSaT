@@ -1,4 +1,4 @@
-function Open-Explorer {
+function Start-Explorer {
     <#
     .SYNOPSIS
     Opens Windows Explorer to the directory of the specified file. If the specified
@@ -48,6 +48,6 @@ function Open-Explorer {
         }
 
         Write-Verbose "explorer.exe $($procArgs -Join " ")"
-        Start-Process explorer.exe -ArgumentList $procArgs
+        Start-Process explorer.exe -ArgumentList $procArgs -PassThru
     }
 }

@@ -30,7 +30,12 @@ function which {
         }
         elseif ($cmd -is [System.Management.Automation.AliasInfo]){
             Write-Verbose """$cmd"" is an alias for $($cmd.ReferencedCommand)"
-            $cmd.ReferencedCommand.DLL
+            if ($cmd.ReferencedCommand.DLL){
+                $cmd.ReferencedCommand.DLL
+            }
+            else{
+                $cmd.ReferencedCommand.ScriptBlock.File
+            }
         }
         elseif ($cmd -is [System.Management.Automation.ApplicationInfo]){
             Write-Verbose "$cmd is an application."

@@ -1,3 +1,13 @@
+function Get-VirtualEnvWorkonDir {
+    $envsDir = $env:WORKON_HOME
+
+    if ($envsDir -eq $null) {
+        $envsDir = "$env:UserProfile\Envs"
+    }
+
+    $envsDir
+}
+
 function Enter-VirtualEnv {
     <#
         .SYNOPSIS
@@ -14,9 +24,9 @@ function Enter-VirtualEnv {
         [switch] $PassThru
     )
 
-    $envsDir = $env:WORKON_HOME
+    $envsDir = Get-VirtualEnvWorkonDir
 
-    if (!(Test-Path $envsDir)){
+    if (!$envsDir -or !(Test-Path $envsDir)){
         Write-Error "WORKON_HOME does not exist."
     }
     elseif ($EnvName){
@@ -33,7 +43,7 @@ function Enter-VirtualEnv {
             }
         }
         else{
-            Write-Error "virtualenv $EnvName does not exist. Create it with `"mkvirtualenv`""
+            Write-Error "virtualenv $EnvName does not exist. Create it with `"mkvirtualenv `"$EnvName`"`" or `"python -m venv `"$envsDir\$EnvName`"`""
         }
     }
     else{
@@ -45,10 +55,14 @@ function Enter-VirtualEnv {
 Register-ArgumentCompleter -ParameterName EnvName -CommandName Enter-VirtualEnv -ScriptBlock {
     param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
     
-    $envsDir = $env:WORKON_HOME
-    if (Test-Path $envsDir) {
+    $envsDir = Get-VirtualEnvWorkonDir
+    if ($envsDir -ne $null -and (Test-Path $envsDir)) {
         Get-ChildItem $envsDir | ForEach-Object { $_.Name } | Where-Object { 
             $_ -like "${wordToComplete}*" 
         }
     }
+}
+
+function Exit-VirtualEnv {
+    deactivate
 }

@@ -1,9 +1,8 @@
-REM Various tools
+# Various tools
 
-REM Make sure you're running from an elevated cmd prompt
-call install-choco.cmd
+# Make sure you're running from an elevated cmd prompt
+.\Install-Choco.ps1
 
-REM Tools
 choco install 7zip.install -y
 choco install sysinternals -y
 choco install dnspy -y

@@ -1,17 +1,19 @@
-REM Development tools
+# Development tools
 
-REM Make sure you're running from an elevated cmd prompt
-call install-choco.cmd
+# Make sure you're running from an elevated cmd prompt
+.\install-choco.ps1
 
-REM Tools
+# Tools
 choco install VisualStudioCode -y
 choco install git.install -y
 choco install tortoisegit -y
 choco install jdk8 -y
 choco install python2 -y
+choco install python3 -y
 choco install NuGet.CommandLine -y
 
-REM IDE
+# IDE
 choco install visualstudio2015community -y
+choco install VisualStudio2017Community -y
 choco install pycharm-community -y
-REM choco install netbeans -y
+# choco install netbeans -y

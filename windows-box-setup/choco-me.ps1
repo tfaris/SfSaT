@@ -1,7 +1,7 @@
-REM Stuff that I might want on any computer that I use.
+# Stuff that I might want on any computer that I use.
 
-REM Make sure you're running from an elevated cmd prompt
-call install-choco.cmd
+# Make sure you're running from an elevated cmd prompt
+.\install-choco.ps1
 
 choco install googlechrome -y
 choco install notepadplusplus.install --forcex86 -y

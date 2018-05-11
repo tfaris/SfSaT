@@ -4,6 +4,6 @@
 # Make sure you're running from an elevated cmd prompt
 .\install-choco.ps1
 
-Get-ChildItems choco-*.ps1 | ForEach-Object {
+Get-ChildItem choco-*.ps1 | ForEach-Object {
 	. $_
 }

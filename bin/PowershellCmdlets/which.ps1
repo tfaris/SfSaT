@@ -21,20 +21,35 @@ function which {
         $cmd = Get-Command $what
 
         if ($cmd -is [System.Management.Automation.FunctionInfo]){
-            Write-Verbose "$cmd is a function."
+            if ($cmd.Module) {
+                Write-Verbose "$cmd is a function in the $($cmd.Module.Name) module."
+            }
+            else {
+                Write-Verbose "$cmd is a function."
+            }
             $cmd.ScriptBlock.File
         }
         elseif ($cmd -is [System.Management.Automation.CmdletInfo]){
-            Write-Verbose "$cmd is a cmdlet."
+            if ($cmd.Module) {
+                Write-Verbose "$cmd is a cmdlet in the $($cmd.Module.Name) module."
+            }
+            else {
+                Write-Verbose "$cmd is a cmdlet."
+            }
             $cmd.DLL
         }
         elseif ($cmd -is [System.Management.Automation.AliasInfo]){
-            Write-Verbose """$cmd"" is an alias for $($cmd.ReferencedCommand)"
-            if ($cmd.ReferencedCommand.DLL){
-                $cmd.ReferencedCommand.DLL
+            if ($cmd.ReferencedCommand) {
+                Write-Verbose """$cmd"" is an alias for $($cmd.ReferencedCommand)"
+                if ($cmd.ReferencedCommand.DLL){
+                    $cmd.ReferencedCommand.DLL
+                }
+                else{
+                    $cmd.ReferencedCommand.ScriptBlock.File
+                }
             }
-            else{
-                $cmd.ReferencedCommand.ScriptBlock.File
+            elseif ($cmd.Definition) {
+                which $cmd.Definition
             }
         }
         elseif ($cmd -is [System.Management.Automation.ApplicationInfo]){

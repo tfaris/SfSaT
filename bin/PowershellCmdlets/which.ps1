@@ -44,8 +44,11 @@ function which {
                 if ($cmd.ReferencedCommand.DLL){
                     $cmd.ReferencedCommand.DLL
                 }
-                else{
+                elseif ($cmd.ReferencedCommand.ScriptBlock){
                     $cmd.ReferencedCommand.ScriptBlock.File
+                }
+                else {
+                    which $cmd.ReferencedCommand
                 }
             }
             elseif ($cmd.Definition) {

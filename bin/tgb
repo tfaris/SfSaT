@@ -1,3 +1,0 @@
-#!/bin/sh
-# Opens the TortoiseGit blame dialog
-"C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe" /command:blame /path:"$1" "$@" &

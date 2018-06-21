@@ -1,8 +1,0 @@
-#!/bin/sh
-# Opens the TortoiseGit log dialog in the current directory.
-if [ "$#" == "1" ] 
-then
-    "C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe" /command:log /range:"$@" &
-else
-    "C:\Program Files\TortoiseGit\bin\TortoiseGitProc.exe" /command:log "$@" &
-fi

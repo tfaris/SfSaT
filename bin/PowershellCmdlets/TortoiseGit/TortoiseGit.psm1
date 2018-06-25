@@ -94,8 +94,14 @@ function Show-TortoiseGitDiff {
     if ($CompareFile) {
         Invoke-TortoiseGitCommand -Command diff -CommandArgs @{path=$CompareFile; path2=$BaseFile}
     }
-    else {
+    elseif ($BaseFile) {
         Invoke-TortoiseGitCommand -Command diff -CommandArgs @{path=$BaseFile}
+    }
+    else {
+        (git diff --name-only) | ForEach-Object {
+            Write-Verbose "$_ changed."
+            Show-TortoiseGitDiff $_
+        }
     }
 }
 

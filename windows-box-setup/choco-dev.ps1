@@ -13,7 +13,7 @@ choco install python3 -y
 choco install NuGet.CommandLine -y
 
 # IDE
-choco install visualstudio2015community -y
+# choco install visualstudio2015community -y
 choco install VisualStudio2017Community -y
-choco install pycharm-community -y
+# choco install pycharm-community -y
 # choco install netbeans -y

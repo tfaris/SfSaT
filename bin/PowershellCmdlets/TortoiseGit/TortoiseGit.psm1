@@ -80,7 +80,7 @@ function Show-TortoiseGitBlame {
         [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)]
         [string] $Path
     )
-    Invoke-TortoiseGitCommand -Command "blame" -CommandArgs @{path=$Path}
+    Invoke-TortoiseGitCommand -Command "blame" -CommandArgs @{path=(dir -R $Path)}
 }
 
 function Show-TortoiseGitDiff {
@@ -137,3 +137,10 @@ $AutoCompleteBranchName = {
 }
 Register-ArgumentCompleter -CommandName "Show-TortoiseGitLog" -ParameterName "Commitish" -ScriptBlock $AutoCompleteBranchName
 Register-ArgumentCompleter -CommandName "Show-TortoiseGitRepoBrowser" -ParameterName "Commitish" -ScriptBlock $AutoCompleteBranchName
+
+Set-Alias tg Show-TortoiseGitLog
+Set-Alias tgc Show-TortoiseGitCommit
+Set-Alias tgb Show-TortoiseGitBlame
+Set-Alias tgm Show-TortoiseGitMerge
+Set-Alias tgr Show-TortoiseGitRepoBrowser
+Set-Alias tgdiff Show-TortoiseGitDiff

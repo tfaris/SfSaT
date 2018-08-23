@@ -8,3 +8,4 @@ choco install sysinternals -y
 choco install dnspy -y
 choco install sudo -y
 choco install hxd -y
+choco install Everything -y

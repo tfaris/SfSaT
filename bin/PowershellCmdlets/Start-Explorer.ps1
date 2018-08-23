@@ -27,14 +27,7 @@ function Start-Explorer {
         }
         elseif ($fileObj -is [String])
         {
-            if ($(Test-Path -Path $fileObj -PathType Leaf))
-            {
-                $fileObj = New-Object System.IO.FileInfo $fileObj
-            }
-            else
-            {
-                $fileObj = New-Object System.IO.DirectoryInfo $fileObj
-            }
+            $fileObj = Get-Item $fileObj
         }
 
         $procArgs = New-Object System.Collections.ArrayList
@@ -48,6 +41,6 @@ function Start-Explorer {
         }
 
         Write-Verbose "explorer.exe $($procArgs -Join " ")"
-        Start-Process explorer.exe -ArgumentList $procArgs -PassThru
+        Start-Process explorer.exe -ArgumentList $procArgs | Out-Null
     }
 }

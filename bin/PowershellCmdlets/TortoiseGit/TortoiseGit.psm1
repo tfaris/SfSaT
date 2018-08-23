@@ -128,3 +128,12 @@ function Show-TortoiseGitRepoBrowser {
 function Show-TortoiseGitMerge {
     Invoke-TortoiseGitCommand -Command merge
 }
+
+$AutoCompleteBranchName = {
+    $wordToComplete = $args[2]
+    (git branch --all --format "%(refname)") | Where-Object {
+        $_.Trim() -match "${wordToComplete}"
+    }
+}
+Register-ArgumentCompleter -CommandName "Show-TortoiseGitLog" -ParameterName "Commitish" -ScriptBlock $AutoCompleteBranchName
+Register-ArgumentCompleter -CommandName "Show-TortoiseGitRepoBrowser" -ParameterName "Commitish" -ScriptBlock $AutoCompleteBranchName

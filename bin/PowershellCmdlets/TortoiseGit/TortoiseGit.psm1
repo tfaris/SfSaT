@@ -71,7 +71,8 @@ function Show-TortoiseGitCommit {
 function Show-TortoiseGitBlame {
     <#
         .SYNOPSIS
-        Open the TortoiseGit commit dialog in the current directory.
+        Open the TortoiseGit blame dialog for files that match the path. Searches recursively
+        in the current directory.
 
         .PARAMETER Path
         The path to the file to blame.
@@ -80,7 +81,10 @@ function Show-TortoiseGitBlame {
         [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$true)]
         [string] $Path
     )
-    Invoke-TortoiseGitCommand -Command "blame" -CommandArgs @{path=(dir -R $Path)}
+    Get-ChildItem -File -R $Path | ForEach-Object {
+        Write-Verbose "blame $($_.FullName)"
+        Invoke-TortoiseGitCommand -Command "blame" -CommandArgs @{path=$_.FullName}
+    }
 }
 
 function Show-TortoiseGitDiff {
